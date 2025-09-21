@@ -1,0 +1,10 @@
+{% extends "Main/base.html" %}
+{% block content %}
+<h2>Submit Story</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
+<a href="{% url 'community:story_list' %}">Back to Stories</a>
+{% endblock %}

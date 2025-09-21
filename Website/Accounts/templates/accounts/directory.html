@@ -1,0 +1,23 @@
+{% extends "Main/base.html" %}
+{% load static %}
+{% block content %}
+<h2>Alumni Directory</h2>
+
+<form method="get" class="mb-3">
+    <input type="text" name="q" placeholder="Search by name or occupation" value="{{ request.GET.q }}">
+    <input type="number" name="year" placeholder="Graduation Year" value="{{ request.GET.year }}">
+    <button type="submit">Search</button>
+</form>
+
+<ul>
+{% for alumni in alumni_list %}
+    <li>
+        <a href="{% url 'Accounts:public_profile' alumni.username %}">
+            {{ alumni.first_name }} {{ alumni.last_name }}
+        </a>
+    </li>
+{% empty %}
+    <li>No alumni found.</li>
+{% endfor %}
+</ul>
+{% endblock %}

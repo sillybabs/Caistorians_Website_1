@@ -1,0 +1,17 @@
+{% extends "Main/base.html" %}
+{% block content %}
+<h2>Stories</h2>
+{% if stories %}
+<ul>
+    {% for story in stories %}
+        <li>
+            <a href="{% url 'community:story_detail' story.pk %}">{{ story.title }}</a>
+            — by {{ story.author.username }} on {{ story.created_at|date:"D, d M Y" }}
+        </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No stories yet.</p>
+{% endif %}
+<a href="{% url 'community:submit_story' %}">Submit Your Story</a>
+{% endblock %}

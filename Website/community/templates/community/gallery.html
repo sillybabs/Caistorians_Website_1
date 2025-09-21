@@ -1,0 +1,18 @@
+{% extends "Main/base.html" %}
+{% block content %}
+<h2>Photo Gallery</h2>
+{% if photos %}
+<div class="gallery">
+    {% for photo in photos %}
+        <div class="photo-card">
+            <img src="{{ photo.image.url }}" alt="{{ photo.caption }}" style="max-width:200px;">
+            <p>{{ photo.caption }}</p>
+            <p>By {{ photo.uploaded_by.username }} on {{ photo.uploaded_at|date:"D, d M Y" }}</p>
+        </div>
+    {% endfor %}
+</div>
+{% else %}
+<p>No photos yet.</p>
+{% endif %}
+<a href="{% url 'community:upload_photo' %}">Upload Your Photo</a>
+{% endblock %}

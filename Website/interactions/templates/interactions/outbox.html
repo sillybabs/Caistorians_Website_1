@@ -1,0 +1,15 @@
+{% extends "Main/base.html" %}
+{% block content %}
+<h2>Outbox</h2>
+<ul>
+{% for msg in messages %}
+    <li>
+        <a href="{% url 'interactions:detail' msg.id %}">
+            {{ msg.subject }}
+        </a> → {{ msg.recipient.username }} ({{ msg.timestamp }})
+    </li>
+{% empty %}
+    <li>No sent messages.</li>
+{% endfor %}
+</ul>
+{% endblock %}

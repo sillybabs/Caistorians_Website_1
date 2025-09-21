@@ -1,0 +1,26 @@
+{% extends "Main/base.html" %}
+{% block content %}
+
+<!-- templates/events/event_detail.html -->
+<h2>{{ event.title }}</h2>
+<p>{{ event.description }}</p>
+<p>{{ event.start_time }} - {{ event.end_time }}</p>
+<p>Location: {{ event.location }}</p>
+
+{% if user.is_authenticated %}
+  <form method="post" action="{% url 'events:event_rsvp' event.pk %}">
+    {% csrf_token %}
+    {{ form.status }}
+    <button type="submit">Save RSVP</button>
+  </form>
+{% endif %}
+
+
+<h3>RSVPs</h3>
+<ul>
+    <li>Yes: {{ rsvps_yes }}</li>
+    <li>Maybe: {{ rsvps_maybe }}</li>
+    <li>No: {{ rsvps_no }}</li>
+</ul>
+<a href="{% url 'events:event_list' %}">Back to Events</a>
+{% endblock %}

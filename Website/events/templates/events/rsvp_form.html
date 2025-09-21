@@ -1,0 +1,15 @@
+{% extends "Main/base.html" %}
+
+{% block content %}
+<h2>RSVP for "{{ event.title }}"</h2>
+<p><strong>When:</strong> {{ event.start_time|date:"D, d M Y H:i" }} – {{ event.end_time|date:"D, d M Y H:i" }}</p>
+<p><strong>Location:</strong> {{ event.location }}</p>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit RSVP</button>
+</form>
+
+<a href="{% url 'events:event_detail' event.pk %}">Back to Event</a>
+{% endblock %}

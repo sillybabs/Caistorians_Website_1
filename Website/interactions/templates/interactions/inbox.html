@@ -1,0 +1,16 @@
+{% extends "Main/base.html" %}
+{% block content %}
+<h2>Inbox</h2>
+<ul>
+  {% for msg in messages %}
+    <li>
+      <a href="{% url 'interactions:detail' msg.id %}">
+        <strong>{{ msg.subject }}</strong> from {{ msg.sender }}
+        {% if not msg.is_read %}<em>(unread)</em>{% endif %}
+      </a>
+    </li>
+  {% empty %}
+    <li>No messages.</li>
+  {% endfor %}
+</ul>
+{% endblock %}
