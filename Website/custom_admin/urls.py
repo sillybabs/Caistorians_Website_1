@@ -4,7 +4,7 @@ from . import views
 app_name = "custom_admin"
 
 urlpatterns = [
-    path("/", views.dashboard, name="dashboard"),
+    path("", views.dashboard, name="dashboard"),
     
     # Users
     path("user/<int:user_id>/delete/", views.delete_user, name="delete_user"),

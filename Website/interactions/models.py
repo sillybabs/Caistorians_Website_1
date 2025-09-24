@@ -1,8 +1,14 @@
 from django.conf import settings
 from django.db import models
-
+from Accounts.models import School
 # Create your models here.
 class Connection(models.Model):
+    school = models.ForeignKey(
+        School,
+        on_delete=models.CASCADE,
+        related_name="events",
+        default=1
+    )
     from_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="connections_sent")
     to_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="connections_received")
     created_at = models.DateTimeField(auto_now_add=True)
@@ -10,8 +16,7 @@ class Connection(models.Model):
 
     class Meta:
         unique_together = ("from_user", "to_user")
-from django.conf import settings
-from django.db import models
+
 
 class Message(models.Model):
     sender = models.ForeignKey(

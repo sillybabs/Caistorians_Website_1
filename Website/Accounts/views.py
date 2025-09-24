@@ -11,7 +11,9 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 from .forms import CustomUserCreationForm
 from django.contrib.auth.decorators import login_required
-# Create your views here.
+from .models import User
+from schools.models import School
+
 
 def user_login_required(view_func):
     def wrapper(request, *args, **kwargs):
@@ -28,8 +30,7 @@ def public_profile_view(request, username):
 def directory_view(request):
     query = request.GET.get("q")
     year = request.GET.get("year")
-
-    alumni_list = User.objects.all().order_by("last_name")
+    alumni_list = User.objects.filter(school=request.user.school, is_student_account = False).order_by("last_name")
 
     if query:
         alumni_list = alumni_list.filter(
@@ -59,16 +60,55 @@ def edit_profile_view(request):
     }
     return render(request, 'Accounts/edit_account.html', context)
 
+def privacy(request):
+    return render(request, 'Accounts/privacy.html')
+
+from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def download_data(request):
+    user = request.user
+    data = {
+        "username": user.username,
+        "email": user.email,
+        "occupation": user.occupation,
+        "bio": user.bio,
+        "date_joined": user.date_joined,
+        "last_login": user.last_login,
+        "first_name": user.first_name,
+        "last_name": user.last_name,
+        "is_active": user.is_active,
+        "is_staff": user.is_staff,
+        "is_superuser": user.is_superuser,
+        "school": user.school.name if user.school else None,
+    }
+    return JsonResponse(data)
+
+
+
 def register_view(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
+        gdpr_consent = request.POST.get('gdpr_consent')
+        if not gdpr_consent:
+            messages.error(request, "You must consent to proceed.")
         if form.is_valid():
             form.save()
             messages.success(request, "Registration successful. Please log in.")
             return redirect('Accounts:login')
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
     return render(request, 'accounts/create_account.html', {'form': form})
+
+from django.shortcuts import redirect, get_object_or_404
+from django.contrib.auth import get_user_model
+from django.contrib import messages
+
+User = get_user_model()
+
+
+
 
 
 def login_view(request):
@@ -83,6 +123,9 @@ def login_view(request):
     else:
         form = AuthenticationForm()
     return render(request, 'accounts/login.html', {'form': form})
+
+from django.shortcuts import render, redirect
+
 
 
 @user_login_required

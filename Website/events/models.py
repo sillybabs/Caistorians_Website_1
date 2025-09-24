@@ -2,8 +2,14 @@ from time import timezone
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
-
+from Accounts.models import School
 class Event(models.Model):
+    school = models.ForeignKey(
+        School,
+        on_delete=models.CASCADE,
+        related_name="Events",
+        default=1
+    )
     title = models.CharField(max_length=200)
     description = models.TextField()
     location = models.CharField(max_length=200, blank=True)
@@ -23,6 +29,13 @@ class Event(models.Model):
 
 
 class RSVP(models.Model):
+    school = models.ForeignKey(
+        School,
+        on_delete=models.CASCADE,
+        related_name="RSVP",
+        default=1
+    )
+
     STATUS_CHOICES = [
         ("yes", "Attending"),
         ("maybe", "Maybe"),

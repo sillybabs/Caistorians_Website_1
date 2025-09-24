@@ -4,42 +4,71 @@
     <meta charset="UTF-8">
     {% load static %}
     <title>{% block title %}Caistorians Website{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'Main/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'Main/style.css' %}">
 </head>
 <body>
     <!-- Navbar -->
 <nav>
-    <ul>
-        <li><a href="{% url 'Main:homepage' %}">Home</a></li>
+  <div class="nav-container">
+    <div class="logo"><a href="{% url 'Main:homepage' %}">Caistorians</a></div>
+    <ul class="nav-links">
+      <!-- Account -->
+      {% if user.is_authenticated %}
+      <li class="dropdown">
+        <a href="#">Account ▾</a>
+        <ul class="dropdown-menu">
+          <li><a href="{% url 'Accounts:profile' %}">My Profile</a></li>
+          <li><a href="{% url 'Accounts:edit_profile' %}">Edit Profile</a></li>
+          <li><a href="{% url 'Accounts:directory' %}">Alumni Directory</a></li>
+          <li><a href="{% url 'Accounts:logout' %}">Logout</a></li>
+          <li><a href="{% url 'notifications:list' %}">Notifications</a></li>
+        </ul>
+      </li>
 
-        {% if user.is_authenticated %}
-            <!-- Personal account links -->
-            <li><a href="{% url 'Accounts:profile' %}">My Profile</a></li>
-            <li><a href="{% url 'Accounts:edit_profile' %}">Edit Profile</a></li>
-            <li><a href="{% url 'Accounts:directory' %}">Alumni Directory</a></li>
-            <li><a href="{% url 'Accounts:logout' %}">Logout</a></li>
-            <li><a href="{% url 'interactions:inbox' %}">Inbox</a></li>
-            <li><a href="{% url 'interactions:outbox' %}">Outbox</a></li>
-            <li><a href="{% url 'interactions:compose' %}">Compose</a></li>
-            <li><a href="{% url 'events:event_list' %}">Events</a></li>
-            <li><a href="{% url 'events:create_event' %}">Create Event</a></li>
-            <li><a href="{% url 'community:gallery' %}">Gallery</a></li>
-            <li><a href="{% url 'community:story_list' %}">Stories</a></li>
-            <li><a href="{% url 'community:submit_story' %}">Submit Story</a></li>
-            <li><a href="{% url 'community:upload_photo' %}">Upload Photo</a></li>
-            <!-- Admin link -->
-            {% if user.is_staff %}
-                <li><a href="{% url 'custom_admin:dashboard' %}">Admin Dashboard</a></li>
-            {% endif %}
-        {% else %}
-            <!-- Public links -->
-            <li><a href="{% url 'Accounts:login' %}">Login</a></li>
-            <li><a href="{% url 'Accounts:create_account' %}">Create Account</a></li>
-            <li><a href="{% url 'Accounts:directory' %}">Alumni Directory</a></li>
+      <!-- Interactions -->
+      <li class="dropdown">
+        <a href="#">Interactions ▾</a>
+        <ul class="dropdown-menu">
+          <li><a href="{% url 'interactions:inbox' %}">Inbox</a></li>
+          <li><a href="{% url 'interactions:outbox' %}">Outbox</a></li>
+          <li><a href="{% url 'interactions:compose' %}">Compose</a></li>
+        </ul>
+      </li>
 
-        {% endif %}
+      <!-- Events -->
+      <li class="dropdown">
+        <a href="#">Events ▾</a>
+        <ul class="dropdown-menu">
+          <li><a href="{% url 'events:event_list' %}">Event List</a></li>
+          <li><a href="{% url 'events:create_event' %}">Create Event</a></li>
+        </ul>
+      </li>
+
+      <!-- Community -->
+      <li class="dropdown">
+        <a href="#">Community ▾</a>
+        <ul class="dropdown-menu">
+          <li><a href="{% url 'community:gallery' %}">Gallery</a></li>
+          <li><a href="{% url 'community:story_list' %}">Stories</a></li>
+          <li><a href="{% url 'community:submit_story' %}">Submit Story</a></li>
+          <li><a href="{% url 'community:upload_photo' %}">Upload Photo</a></li>
+        </ul>
+      </li>
+
+      <!-- Admin -->
+      {% if user.is_staff_account %}
+      <li><a href="{% url 'custom_admin:dashboard' %}">Admin Dashboard</a></li>
+      {% endif %}
+
+      {% else %}
+      <li><a href="{% url 'Accounts:login' %}">Login</a></li>
+      <li><a href="{% url 'Accounts:create_account' %}">Create Account</a></li>
+      <li><a href="{% url 'Accounts:directory' %}">Alumni Directory</a></li>
+      {% endif %}
     </ul>
+  </div>
 </nav>
+
 
 
     <!-- Main Content -->

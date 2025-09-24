@@ -6,15 +6,14 @@ from events.models import Event
 from community.models import Photo, Story
 from .models import AdminLog, Report
 from django.db.models import Q
-
 def staff_required(user):
-    return user.is_staff
+    return user.is_staff_account
 
 @login_required
 @user_passes_test(staff_required)
 def dashboard(request):
     search_query = request.GET.get('search', '')
-    users = User.objects.all()
+    users = User.objects.filter(school=request.user.school)
     if search_query:
         users = users.filter(
             Q(username__icontains=search_query) |
@@ -23,11 +22,11 @@ def dashboard(request):
             Q(last_name__icontains=search_query)
         )
 
-    events = Event.objects.all()
-    photos = Photo.objects.all()
-    stories = Story.objects.all()
-    reports = Report.objects.filter(resolved=False)
-    logs = AdminLog.objects.order_by('-created_at')[:50]  # last 50 actions
+    events = Event.objects.filter(school=request.user.school)
+    photos = Photo.objects.filter(school=request.user.school)
+    stories = Story.objects.filter(school=request.user.school)
+    reports = Report.objects.filter(school=request.user.school, resolved=False)
+    logs = AdminLog.objects.filter(school=request.user.school).order_by('-created_at')[:50]  # last 50 actions
 
     return render(request, "custom_admin/dashboard.html", {
         "users": users,
@@ -48,8 +47,8 @@ def delete_user(request, user_id):
     user = get_object_or_404(User, id=user_id)
     user.delete()
     messages.success(request, "User deleted")
-    AdminLog.objects.create(admin=request.user, action=f"Deleted user {user.username}")
-    return redirect("custom_:dashboard")
+    AdminLog.objects.create(admin=request.user, action=f"Deleted user {user.username}", school=request.user.school)
+    return redirect("custom_admin:dashboard")
 
 # ------------------------
 # Event management
@@ -60,7 +59,7 @@ def delete_event(request, event_id):
     event = get_object_or_404(Event, id=event_id)
     event.delete()
     messages.success(request, "Event deleted")
-    AdminLog.objects.create(admin=request.user, action=f"Deleted event {event.title}")
+    AdminLog.objects.create(admin=request.user, action=f"Deleted event {event.title}", school=request.user.school)
     return redirect("custom_admin:dashboard")
 
 # ------------------------
@@ -73,7 +72,7 @@ def approve_photo(request, photo_id):
     photo.approved = True
     photo.save()
     messages.success(request, "Photo approved")
-    AdminLog.objects.create(admin=request.user, action=f"Approved photo {photo.caption}")
+    AdminLog.objects.create(admin=request.user, action=f"Approved photo {photo.caption}", school=request.user.school)
     return redirect("custom_admin:dashboard")
 
 @login_required
@@ -82,7 +81,7 @@ def delete_photo(request, photo_id):
     photo = get_object_or_404(Photo, id=photo_id)
     photo.delete()
     messages.success(request, "Photo deleted")
-    AdminLog.objects.create(admin=request.user, action=f"Deleted photo {photo.caption}")
+    AdminLog.objects.create(admin=request.user, action=f"Deleted photo {photo.caption}", school=request.user.school)
     return redirect("custom_admin:dashboard")
 
 # ------------------------
@@ -95,7 +94,7 @@ def approve_story(request, story_id):
     story.approved = True
     story.save()
     messages.success(request, "Story approved")
-    AdminLog.objects.create(admin=request.user, action=f"Approved story {story.title}")
+    AdminLog.objects.create(admin=request.user, action=f"Approved story {story.title}", school=request.user.school)
     return redirect("custom_admin:dashboard")
 
 @login_required
@@ -104,7 +103,7 @@ def delete_story(request, story_id):
     story = get_object_or_404(Story, id=story_id)
     story.delete()
     messages.success(request, "Story deleted")
-    AdminLog.objects.create(admin=request.user, action=f"Deleted story {story.title}")
+    AdminLog.objects.create(admin=request.user, action=f"Deleted story {story.title}", school=request.user.school)
     return redirect("custom_admin:dashboard")
 
 # ------------------------
@@ -117,5 +116,5 @@ def resolve_report(request, report_id):
     report.resolved = True
     report.save()
     messages.success(request, "Report marked as resolved")
-    AdminLog.objects.create(admin=request.user, action=f"Resolved report #{report.id}")
+    AdminLog.objects.create(admin=request.user, action=f"Resolved report #{report.id}", school=request.user.school)
     return redirect("custom_admin:dashboard")

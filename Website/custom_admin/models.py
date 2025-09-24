@@ -3,8 +3,14 @@ from django.conf import settings
 from Accounts.models import User
 from events.models import Event
 from community.models import Photo, Story
-
+from Accounts.models import School
 class AdminLog(models.Model):
+    school = models.ForeignKey(
+        School,
+        on_delete=models.CASCADE,
+        related_name="AdminLog",
+        default=1
+    )
     admin = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     action = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -14,6 +20,12 @@ class AdminLog(models.Model):
 
 # Optional: Report model for flagged content
 class Report(models.Model):
+    school = models.ForeignKey(
+        School,
+        on_delete=models.CASCADE,
+        related_name="Report",
+        default=1
+    )
     REPORT_CHOICES = [
         ('photo', 'Photo'),
         ('story', 'Story'),

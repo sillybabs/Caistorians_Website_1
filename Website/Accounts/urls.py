@@ -10,4 +10,6 @@ urlpatterns = [
     path('edit_profile/', views.edit_profile_view, name='edit_profile'),
     path("profile/<str:username>/", views.public_profile_view, name="public_profile"),
     path("directory/", views.directory_view, name="directory"),
+    path('privacy/', views.privacy, name='privacy'),
+    path('download_data/', views.download_data, name='download_data'),
 ]

@@ -1,0 +1,12 @@
+{% extends "Main/base.html" %}
+{% load static %}
+{% block content %}
+
+<h2 class="schoolname">{{ school.name }}</h2>
+{% if school.logo %}
+<img src="{{ school.logo.url }}" alt="{{ school.name }} Logo" style="max-width: 200px; max-height: 200px;">
+{% endif %}
+<p>{{ school.description }}</p>
+<p><strong>Address:</strong> {{ school.address }}</p>
+
+{% endblock %}

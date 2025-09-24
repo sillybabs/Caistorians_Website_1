@@ -4,14 +4,13 @@ from django.contrib.auth.decorators import login_required
 from .models import Event, RSVP
 from .forms import EventForm, RSVPForm
 from django.contrib import messages
-
-
-
+from notifications.utils import create_notification
+from django.urls import reverse
 
 
 
 def event_list_view(request):
-    events = Event.objects.order_by("start_time")
+    events = Event.objects.filter(school=request.user.school).order_by("start_time")
     return render(request, "events/event_list.html", {"events": events})
 
 
@@ -55,6 +54,7 @@ def event_create(request):
         if form.is_valid():
             event = form.save(commit=False)
             event.created_by = request.user
+            create_notification(title=f"{event.title}", message="Check out the upcoming event!", school=request.user.school, link=reverse("events:event_list"))
             event.save()
             return redirect("events:event_list")
     else:

@@ -2,13 +2,19 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
+from .models import School
 User = get_user_model()
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
-
+    school = forms.ModelChoiceField(
+        queryset=School.objects.all(),
+        required=True,
+        empty_label="Select a school",
+        label="School")
+    is_student_account = forms.BooleanField(required=False, label="I am a student")
     class Meta:
         model = get_user_model()
-        fields = ("username", "email", "password1", "password2")
+        fields = ("username", "email", "school", "is_student_account", "password1", "password2")
 
     def save(self, commit=True):
         user = super().save(commit=False)
@@ -16,7 +22,9 @@ class CustomUserCreationForm(UserCreationForm):
         if commit:
             user.save()
         return user
-    
+from .models import School
+
+
 
 from django import forms
 from django.contrib.auth import get_user_model

@@ -26,6 +26,10 @@ urlpatterns = [
     path("events/", include("events.urls", namespace="events")),
     path("community/", include("community.urls", namespace="community")),
     path('custom_admin/', include('custom_admin.urls', namespace="custom_admin")),  # Admin site
+    path('schools/', include('schools.urls', namespace='schools')),  # Schools app
+    path('news/', include('news.urls', namespace='news')),  # News app
+    path('notifications/', include('notifications.urls', namespace='notifications')),  # Notifications app
+
 ]
 
 if settings.DEBUG:

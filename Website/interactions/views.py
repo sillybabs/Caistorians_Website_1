@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 from .models import Message
 from .forms import MessageForm
-
+from notifications.utils import create_notification
 #Create your views here.
 
 @login_required
@@ -24,8 +25,8 @@ def message_detail_view(request, pk):
         return redirect("interactions:inbox")
 
     # Mark as read only if recipient is opening it
-    if request.user == message.recipient and not message.read:
-        message.read = True
+    if request.user == message.recipient:
+        message.is_read = True
         message.save()
 
     return render(request, "interactions/message_detail.html", {"message": message})
@@ -40,7 +41,7 @@ def compose_view(request):
         from django.contrib.auth import get_user_model
         User = get_user_model()
         try:
-            initial_data["recipient"] = User.objects.get(username=to_user)
+            initial_data["recipient"] = User.objects.filter(school=request.user.school).get(username=to_user)
         except User.DoesNotExist:
             pass
     if subject:
@@ -52,6 +53,12 @@ def compose_view(request):
             msg = form.save(commit=False)
             msg.sender = request.user
             msg.save()
+            create_notification(
+                title="New Message",
+                message=f"You got a new message from {request.user}",
+                users=[msg.recipient],  # ✅ correct
+                link=reverse("interactions:detail", args=[msg.id])  # ✅ generate proper URL
+            )
             return redirect("interactions:outbox")
     else:
         form = MessageForm(initial=initial_data)

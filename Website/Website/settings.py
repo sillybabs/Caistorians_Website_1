@@ -39,13 +39,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'Main',
     'Accounts',
     'interactions',
     'events',
     'community',
     'custom_admin',  # Custom admin app
+    'schools',
+    'news',  # News app
+    'notifications',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

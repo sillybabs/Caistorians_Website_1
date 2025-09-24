@@ -21,8 +21,8 @@ def upload_photo(request):
     return render(request, "community/upload_photo.html", {"form": form})
 
 def gallery_view(request):
-    #photos = Photo.objects.filter(approved=True).order_by("-uploaded_at")
-    photos = Photo.objects.order_by("-uploaded_at")
+    photos = Photo.objects.filter(school=request.user.school, approved=True).order_by("-uploaded_at")
+    #photos = Photo.objects.order_by("-uploaded_at")  ------For testing purposes, show unapproved photos too
     return render(request, "community/gallery.html", {"photos": photos})
 
 
@@ -63,8 +63,8 @@ def submit_story(request):
     return render(request, "community/submit_story.html", {"form": form})
 
 def story_list(request):
-    #stories = Story.objects.filter(approved=True).order_by("-created_at")
-    stories = Story.objects.order_by("-created_at")
+    stories = Story.objects.filter(school=request.user.school, approved=True).order_by("-created_at")
+    #stories = Story.objects.order_by("-created_at") -----For testing purposes, show unapproved stories too
     return render(request, "community/story_list.html", {"stories": stories})
 
 def story_detail(request, pk):
