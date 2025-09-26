@@ -1,3 +1,6 @@
+/*  Update using classes. Name the class as {name of template}_{something useful}, eg. class="homepage_maintitle", then in css .homepage_maintitle {} */
+
+
 nav {
     background: #9a9a9b;
     padding: 0.5rem 1rem;

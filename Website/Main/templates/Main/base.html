@@ -52,12 +52,16 @@
           <li><a href="{% url 'community:story_list' %}">Stories</a></li>
           <li><a href="{% url 'community:submit_story' %}">Submit Story</a></li>
           <li><a href="{% url 'community:upload_photo' %}">Upload Photo</a></li>
+          <li><a href="{% url 'schools:school_list' %}">Schools List</a></li>
         </ul>
       </li>
 
       <!-- Admin -->
       {% if user.is_staff_account %}
       <li><a href="{% url 'custom_admin:dashboard' %}">Admin Dashboard</a></li>
+        {% if user.is_superuser_account %}
+          <li><a href="{% url 'schools:create_school' %}">Create School</a></li>
+        {% endif %}
       {% endif %}
 
       {% else %}

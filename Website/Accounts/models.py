@@ -1,5 +1,5 @@
-from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.db import models #type: ignore
+from django.contrib.auth.models import AbstractUser # type: ignore
 from datetime import datetime
 from schools.models import School
 
@@ -14,6 +14,7 @@ class User(AbstractUser):
     is_staff_account = models.BooleanField(default=False)
     is_superuser_account = models.BooleanField(default=False)
     is_student_account = models.BooleanField(default=False)
+
 
     def __str__(self):
         return f"{self.username} ({self.first_name} {self.last_name})"
