@@ -3,14 +3,24 @@
 <head>
     <meta charset="UTF-8">
     {% load static %}
-    <title>{% block title %}Caistorians Website{% endblock %}</title>
+    <title>{% block title %}The Alumni Society{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'Main/style.css' %}">
 </head>
 <body>
     <!-- Navbar -->
 <nav>
   <div class="nav-container">
-    <div class="logo"><a href="{% url 'Main:homepage' %}">Caistorians</a></div>
+    <div class="logo">
+      <a href="{% url 'Main:homepage' %}" class="logo1">
+        <p class="navtitle">
+          {% if user.is_authenticated %}
+            <img class="navbar-logo" src="{{ user.school.logo.url }}">
+          {% else %}
+            The Alumni Society
+          {% endif %}
+        </p>
+      </a>
+    </div>
     <ul class="nav-links">
       <!-- Account -->
       {% if user.is_authenticated %}
@@ -59,7 +69,9 @@
       <!-- Admin -->
       {% if user.is_staff_account %}
       <li><a href="{% url 'custom_admin:dashboard' %}">Admin Dashboard</a></li>
-        {% if user.is_superuser_account %}
+      <li><a href="{% url 'schools:edit_school' school.id %}">Edit School</a></li>
+
+        {% if user.is_superuser_account or user.is_superuser %}
           <li><a href="{% url 'schools:create_school' %}">Create School</a></li>
         {% endif %}
       {% endif %}
@@ -67,7 +79,6 @@
       {% else %}
       <li><a href="{% url 'Accounts:login' %}">Login</a></li>
       <li><a href="{% url 'Accounts:create_account' %}">Create Account</a></li>
-      <li><a href="{% url 'Accounts:directory' %}">Alumni Directory</a></li>
       {% endif %}
     </ul>
   </div>

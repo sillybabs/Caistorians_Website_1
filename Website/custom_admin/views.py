@@ -118,3 +118,16 @@ def resolve_report(request, report_id):
     messages.success(request, "Report marked as resolved")
     AdminLog.objects.create(admin=request.user, action=f"Resolved report #{report.id}", school=request.user.school)
     return redirect("custom_admin:dashboard")
+
+
+
+def upload_school_image(request):
+    if request.method == 'POST':
+        form = SchoolHomepageImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('custom_admin:upload_school_image')  # or some success page
+    else:
+        form = SchoolHomepageImageForm()
+    
+    return render(request, 'custom_admin/upload_school_image.html', {'form': form})

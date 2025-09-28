@@ -22,4 +22,6 @@ urlpatterns = [
 
     # Reports
     path("report/<int:report_id>/resolve/", views.resolve_report, name="resolve_report"),
+
+
 ]

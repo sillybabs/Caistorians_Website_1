@@ -2,25 +2,30 @@
 {% load static %}
 
 {% block content %}
-
-<h2>{{ alumni.first_name }} {{ alumni.last_name }}</h2>
-<ul>
-    <li><strong>Username:</strong> {{ alumni.username }}</li>
-    <li><strong>Email:</strong> {{ alumni.email }}</li>
-    <li><strong>Graduation Year:</strong> {{ alumni.graduation_year }}</li>
-    <li><strong>Occupation:</strong> {{ alumni.occupation }}</li>
-    <li><strong>Bio:</strong> {{ alumni.bio }}</li>
-    <li><strong>LinkedIn:</strong>
-        {% if alumni.linkedin_url %}
-            <a href="{{ alumni.linkedin_url }}" target="_blank">{{ alumni.linkedin_url }}</a>
-        {% endif %}
-    </li>
-    <li><strong>Profile Picture:</strong>
+<div class="profile-container">
+    <div class="profile-left">
+        <h2>{{ alumni.username }}</h2>
         {% if alumni.profile_picture %}
-            <img src="{{ alumni.profile_picture.url }}" class="img-thumbnail" style="max-height: 150px;">
+            <img src="{{ alumni.profile_picture.url }}" alt="{{ alumni.username }} Profile Picture" class="profile-img">
         {% else %}
-            <span>No picture uploaded</span>
+            <div class="profile-no-img">No picture uploaded</div>
         {% endif %}
-    </li>
-</ul>
+    </div>
+
+    <div class="profile-right">
+        <ul>
+            <li><strong>Full Name:</strong> {{ alumni.first_name }} {{ alumni.last_name }}</li>
+            <li><strong>Graduation Year:</strong> {{ alumni.graduation_year }}</li>
+            <li><strong>Occupation:</strong> {{ alumni.occupation }}</li>
+            <li><strong>Bio:</strong> {{ alumni.bio }}</li>
+            <li><strong>LinkedIn:</strong>
+                {% if alumni.linkedin_url %}
+                    <a href="{{ alumni.linkedin_url }}" target="_blank">{{ alumni.linkedin_url }}</a>
+                {% else %}
+                    <span class="text-muted">Not provided</span>
+                {% endif %}
+            </li>
+        </ul>
+    </div>
+</div>
 {% endblock %}

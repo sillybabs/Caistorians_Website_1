@@ -1,5 +1,6 @@
 from django import forms
-from .models import School
+from django.forms import modelformset_factory
+from .models import School, HistoricalImage, AlumniHighlight
 from Accounts.models import User
 
 
@@ -9,7 +10,7 @@ class SchoolForm(forms.ModelForm):
 
     class Meta:
         model = School
-        fields = ['name', 'logo', 'description', 'address', 'staff_username', 'staff_password']
+        fields = ['name', 'logo', 'description', 'address', 'banner_image', 'staff_username', 'staff_password']
 
     def save(self, commit=True):
         school = super().save(commit=commit)
@@ -26,3 +27,50 @@ class SchoolForm(forms.ModelForm):
         )
 
         return school
+
+
+# Form for HistoricalImage
+class HistoricalImageForm(forms.ModelForm):
+    class Meta:
+        model = HistoricalImage
+        fields = ['image', 'caption']
+
+
+# Form for AlumniHighlight
+class AlumniHighlightForm(forms.ModelForm):
+    class Meta:
+        model = AlumniHighlight
+        fields = ['photo', 'name', 'quote']
+
+
+# Formsets (extra=1 means at least one blank form will always show)
+HistoricalImageFormSet = modelformset_factory(HistoricalImage, form=HistoricalImageForm, extra=3, can_delete=True)
+AlumniHighlightFormSet = modelformset_factory(AlumniHighlight, form=AlumniHighlightForm, extra=3, can_delete=True)
+
+
+
+from django import forms
+from django.forms import inlineformset_factory
+from .models import School, HistoricalImage, AlumniHighlight
+
+class EditSchoolForm(forms.ModelForm):
+    class Meta:
+        model = School
+        fields = ['name', 'logo', 'description', 'address', 'banner_image']
+
+# Inline formsets for related images
+HistoricalImageFormSet = inlineformset_factory(
+    parent_model=School,
+    model=HistoricalImage,
+    fields=['image', 'caption'],
+    extra=1,        # always show at least 1 empty form to add
+    can_delete=True # allow deleting
+)
+
+AlumniHighlightFormSet = inlineformset_factory(
+    parent_model=School,
+    model=AlumniHighlight,
+    fields=['photo', 'name', 'quote'],
+    extra=1,
+    can_delete=True
+)

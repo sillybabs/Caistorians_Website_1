@@ -55,5 +55,7 @@ class UserEditForm(forms.ModelForm):
             'occupation': forms.TextInput(attrs={'class': 'form-control'}),
             'bio': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
             'linkedin_url': forms.URLInput(attrs={'class': 'form-control'}),
-            'profile_picture': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+            'profile_picture': forms.ClearableFileInput(attrs={
+                'class': 'form-control-file'
+            }),
         }

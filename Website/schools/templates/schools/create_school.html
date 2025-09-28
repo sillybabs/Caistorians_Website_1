@@ -1,12 +1,18 @@
-{% extends "Main/base.html" %}
-
-{% block content %}
-<h2>Create a New School</h2>
-
-<form method="POST" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Create School</button>
-</form>
 
-{% endblock %}
+    <h3>Historical Images</h3>
+    {{ historical_formset.management_form }}
+    {% for hform in historical_formset %}
+        {{ hform.as_p }}
+    {% endfor %}
+
+    <h3>Alumni Highlights</h3>
+    {{ alumni_formset.management_form }}
+    {% for aform in alumni_formset %}
+        {{ aform.as_p }}
+    {% endfor %}
+
+    <button type="submit">Create School</button>
+</form>

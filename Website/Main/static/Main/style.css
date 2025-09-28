@@ -1,16 +1,15 @@
 /*  Update using classes. Name the class as {name of template}_{something useful}, eg. class="homepage_maintitle", then in css .homepage_maintitle {} */
-
-
+/* NAV + FOOTER */
 nav {
-    background: #9a9a9b;
+    background: #1e3a5f; /* deep navy */
     padding: 0.5rem 1rem;
 }
 
 footer {
-    background: #9a9a9b;
-    padding: 0.5rem 1rem;
-    text-align: center;
+    background: #1e3a5f; /* deep navy */
     padding: 1rem 0;
+    text-align: center;
+    color: #f1f5f9;
 }
 
 .nav-container {
@@ -31,16 +30,28 @@ footer {
     position: relative;
 }
 
+.logo1 {
+    text-decoration: none;
+    color: inherit;
+}
+
+.navtitle {
+    color: #f1f5f9;
+    text-decoration: none;
+    padding: 0.5rem 0.75rem;
+    display: block;
+}
+
 .nav-links a {
-    color: #fff;
+    color: #f1f5f9;
     text-decoration: none;
     padding: 0.5rem 0.75rem;
     display: block;
 }
 
 .nav-links a:hover {
-    background: #343a40;
-    border-radius: 4px;
+    background: #2c4c72; /* lighter navy */
+    border-radius: 0;
 }
 
 .dropdown-menu {
@@ -48,7 +59,7 @@ footer {
     position: absolute;
     top: 100%;
     left: 0;
-    background: #495057;
+    background: #2c4c72;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -64,18 +75,737 @@ footer {
     display: block;
 }
 
+/* LAYOUT */
 body {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* full viewport height */
+    min-height: 100vh;
     margin: 0;
     padding: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #f8fafc; /* very light blue-grey */
+    color: #222;
 }
 
 main {
     flex: 1;
 }
 
-.schoolname {
+/* Homepage styles -------------------------------------------------------------------------------------Homepage---------------------------*/
+.homepage_container {
     text-align: center;
+}
+
+/* Hero Section */
+.homepage_hero {
+    background: linear-gradient(135deg, #1e3a5f, #2c4c72); /* navy gradient */
+    color: #f1f5f9;
+    padding: 4rem 2rem;
+    border-radius: 0;
+    margin-bottom: 2rem;
+    width: 100%;
+    text-align: center;
+}
+
+.homepage_maintitle {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.homepage_tagline {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #e2e8f0; /* muted light */
+}
+
+.homepage_ctabutton {
+    background: #3b82f6; /* softer sky blue */
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.homepage_ctabutton:hover {
+    background: #2563eb; /* darker sky blue */
+}
+
+/* Features Section */
+.homepage_features {
+    display: flex;
+    justify-content: space-around;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.homepage_featurecard {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid #dce3eb;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    flex: 1;
+    min-width: 250px;
+    max-width: 300px;
+}
+
+.homepage_featuretitle {
+    margin-bottom: 0.5rem;
+    color: #1e3a5f; /* navy */
+}
+
+.homepage_featuretext {
+    margin-bottom: 1rem;
+    color: #475569; /* muted grey-blue */
+}
+
+.homepage_featurelink {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #3b82f6; /* sky blue */
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.homepage_featurelink:hover {
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .homepage_features {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Section defaults */
+.homepage_container section {
+    padding: 4rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.homepage_sectiontitle {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.homepage_text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #444;
+}
+
+/* Why Alumni Societies */
+.homepage_twocolumns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+}
+
+.homepage_benefitslist {
+    list-style: disc;
+    padding-left: 1.5rem;
+    color: #555;
+}
+
+.homepage_imageplaceholder {
+    background: #e9ecef;
+    border: 2px dashed #adb5bd;
+    border-radius: 8px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+/* Use Cases */
+.homepage_usecasesgrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.homepage_usecasecard {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+/* Upcoming Features */
+.homepage_future {
+    text-align: center;
+}
+.homepage_futurelist {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0;
+}
+.homepage_futurelist li {
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+}
+
+/* CTA Section */
+.homepage_ctasection {
+    text-align: center;
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 4rem 2rem;
+    margin-top: 4rem;
+}
+
+
+/* Login page styles ------------------------------------------------------------------------------   Login----------------------------------------------*/
+.login-container {
+    max-width: 400px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.login-container h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #343a40;
+}
+
+.login-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.login-container input[type="text"],
+.login-container input[type="email"],
+.login-container input[type="password"] {
+    padding: 0.75rem 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.login-container button {
+    padding: 0.75rem 1rem;
+    background: #3b82f6;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.login-container button:hover {
+    background: #343a40;
+}
+
+.login-container p {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+.login-container p a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.login-container p a:hover {
+    text-decoration: underline;
+}
+
+
+
+/*School Homepage ----------------------------------------------------------------------------------------------------------------Schol Homepage ------------------------*/
+/* Hero Section */
+.school_hero {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+}
+.school_hero_image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.school_hero_overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background: rgba(0,0,0,0.4);
+    padding: 2rem 3rem;
+    border-radius: 10px;
+    color: #fff;
+}
+.school_hero_title {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+.school_hero_tagline {
+    font-size: 1.2rem;
+}
+
+/* Feature Boxes */
+.school_featureboxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin: 3rem 0;
+}
+.school_box {
+    flex: 1 1 250px;
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    text-align: center;
+}
+.school_box img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+.school_box a {
+    display: inline-block;
+    margin-top: 0.5rem;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+}
+.school_box a:hover {
+    text-decoration: underline;
+}
+
+/* Historical Section */
+.school_history {
+    background: #f4f4f4;
+    padding: 3rem 1rem;
+    text-align: center;
+}
+.school_history_images {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+.school_history_images img {
+    width: 200px;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+.school_history a {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background: #343a40;
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+}
+.school_history a:hover {
+    background: #495057;
+}
+
+.navbar-logo {
+    max-width: 120px;    /* adjust to fit your navbar */
+    max-height: 60px;    /* optional: constrain height */
+    height: auto;        /* maintain aspect ratio */
+    width: auto;         /* maintain aspect ratio */
+    object-fit: contain; /* ensures it scales nicely without cropping */
+}
+
+
+/* Alumni Slider */
+.school_alumni_slider {
+    margin: 3rem 0;
+    text-align: center;
+}
+.alumni_slider_container {
+    display: flex;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    overflow-x: auto;           /* horizontal scroll if needed */
+    justify-content: center;    /* center cards if few items */
+    flex-wrap: nowrap;          /* keep in a single row */
+    scroll-snap-type: x mandatory; /* optional: nice snapping effect */
+}
+
+.alumni_slide {
+    flex: 0 1 180px;           /* fixed min width, can shrink slightly */
+    max-width: 180px;          /* prevents stretching too much */
+    background: #fff;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    scroll-snap-align: start;  /* optional: aligns each card to container start */
+}
+
+.alumni_slide img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+}
+.alumni_name {
+    font-weight: bold;
+}
+.alumni_quote {
+    font-size: 0.9rem;
+    font-style: italic;
+}
+.alumni_cta {
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
+/* Responsive */
+@media(max-width: 900px){
+    .school_featureboxes {
+        flex-direction: column;
+    }
+    .school_history_images {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .alumni_slide {
+        width: 150px;
+    }
+}
+
+
+/*Personal_profile ----------------------------------------------------------------------------------------Profile-----------------------------------------------------------------*/
+.profile-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 2rem;
+}
+
+.profile-box {
+    display: flex;
+    flex-wrap: wrap;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    padding: 2rem;
+    gap: 2rem;
+}
+
+.profile-left {
+    flex: 0 0 200px;
+    max-width: 200px;
+    text-align: center;
+}
+
+.profile-username {
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.profile-img {
+    width: 100%;
+    border-radius: 8px;
+    display: block;
+}
+
+.no-picture {
+    width: 100%;
+    height: 200px;
+    background: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    color: #666;
+    text-align: center;
+}
+
+.profile-right {
+    flex: 1;
+}
+
+.profile-right ul {
+    list-style: none;
+    padding: 0;
+}
+
+.profile-right li {
+    margin-bottom: 0.5rem;
+}
+
+.profile-right a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.profile-right a:hover {
+    text-decoration: underline;
+}
+
+.btn-primary {
+    margin-top: 1rem;
+}
+
+
+/*Directory ----------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+
+.directory-title {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.directory-search {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.directory-search input,
+.directory-search button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+}
+
+.directory-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.directory-card {
+    display: flex;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    overflow: hidden;
+    width: 250px;
+}
+
+.directory-card-left {
+    flex: 0 0 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f1f1f1;
+}
+
+.directory-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.directory-no-img {
+    width: 60px;
+    height: 60px;
+    background: #ccc;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+.directory-card-right {
+    flex: 1;
+    padding: 0.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.directory-card-right p {
+    margin: 0.2rem 0;
+    font-size: 0.9rem;
+}
+
+.directory-card-link {
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.15s, box-shadow 0.15s;
+    display: inline-block; /* ensures proper spacing in flex container */
+}
+
+.directory-card-link:hover .directory-card {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+
+
+/*Public Profile ------------------------------------------------------------------------------------------------------------------------------------------------------*/
+.profile-container {
+    display: flex;
+    gap: 2rem;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    max-width: 900px;
+    margin: 2rem auto;
+}
+
+.profile-left {
+    flex: 0 0 200px;
+    text-align: center;
+}
+
+.profile-img {
+    max-width: 180px;
+    border-radius: 8px;
+}
+
+.profile-no-img {
+    width: 180px;
+    height: 180px;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    color: #999;
+}
+
+.profile-right {
+    flex: 1;
+}
+
+.profile-right ul {
+    list-style: none;
+    padding: 0;
+}
+
+.profile-right li {
+    margin-bottom: 0.75rem;
+}
+
+
+/*Edit Profile ---------------------------------------------------------------------------------------------------------------------------*/
+.profile-edit-container {
+    max-width: 960px;
+    margin: 3rem auto;
+    padding: 2.5rem 3rem;
+    background: #fdfdfd;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    font-family: 'Inter', sans-serif;
+}
+
+.profile-edit-title {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: #333;
+}
+
+.profile-edit-form {
+    width: 100%;
+}
+
+.profile-edit-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.profile-edit-left,
+.profile-edit-right {
+    flex: 1 1 400px;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #555;
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 0.65rem 0.8rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.15);
+}
+
+textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.profile-edit-right .current-profile-img {
+    margin-top: 0.8rem;
+    text-align: center;
+}
+
+.profile-edit-right .current-profile-img img {
+    max-width: 180px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.btn.profile-edit-btn {
+    display: block;
+    margin: 2rem auto 0;
+    padding: 0.85rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.25s, transform 0.2s;
+}
+
+.btn.profile-edit-btn:hover {
+    background: linear-gradient(90deg, #0056b3, #003f7f);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .profile-edit-row {
+        flex-direction: column;
+    }
 }
