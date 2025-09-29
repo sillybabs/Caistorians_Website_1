@@ -1,16 +1,23 @@
 {% extends "Main/base.html" %}
 {% block content %}
-<h2>Inbox</h2>
-<ul>
-  {% for msg in messages %}
-    <li>
-      <a href="{% url 'interactions:detail' msg.id %}">
-        <strong>{{ msg.subject }}</strong> from {{ msg.sender }}
-        {% if not msg.is_read %}<em>(unread)</em>{% endif %}
-      </a>
-    </li>
-  {% empty %}
-    <li>No messages.</li>
-  {% endfor %}
-</ul>
+<div class="inbox-container">
+  <h2 class="inbox-title">Inbox</h2>
+  <ul class="inbox-list">
+    {% for msg in messages %}
+      <li class="inbox-card {% if not msg.is_read %}unread{% endif %}">
+        <a href="{% url 'interactions:detail' msg.id %}" class="inbox-link">
+          <div class="inbox-header">
+            <strong class="inbox-subject">{{ msg.subject }}</strong>
+            <span class="inbox-sender">from {{ msg.sender }}</span>
+          </div>
+          {% if not msg.is_read %}
+            <span class="inbox-status">Unread</span>
+          {% endif %}
+        </a>
+      </li>
+    {% empty %}
+      <li class="inbox-empty">No messages.</li>
+    {% endfor %}
+  </ul>
+</div>
 {% endblock %}

@@ -1,21 +1,27 @@
 {% extends "Main/base.html" %}
 {% block content %}
-<h1>Notifications</h1>
-<ul>
-  {% for note in notifications %}
-    {% with state=user_states.note.id %}
-      <strong>{{ note.title }}</strong> - {{ note.created_at|date:"M d, Y H:i" }}
-      <p>{{ note.message }}</p>
-      {% if note.link %}
-        <a href="{{ note.link }}">View</a>
-      {% endif %}
-      <a href="{% url 'notifications:mark_as_read' note.id %}">Mark as read</a>
-
-
-    </li>
-    {% endwith %}
-  {% empty %}
-    <li>No notifications.</li>
-  {% endfor %}
-</ul>
+<div class="notifications-container">
+  <h1 class="notifications-title">Notifications</h1>
+  <ul class="notifications-list">
+    {% for note in notifications %}
+      <li class="notification-card {% if note.is_read %}read{% else %}unread{% endif %}">
+        <div class="notification-header">
+          <strong class="notification-title">{{ note.title }}</strong>
+          <span class="notification-date">{{ note.created_at|date:"M d, Y H:i" }}</span>
+        </div>
+        <p class="notification-message">{{ note.message }}</p>
+        <div class="notification-actions">
+          {% if note.link %}
+            <a href="{{ note.link }}" class="btn notification-btn">View</a>
+          {% endif %}
+          <a href="{% url 'notifications:mark_as_read' note.id %}" class="btn notification-btn mark-read-btn">
+            Mark as read
+          </a>
+        </div>
+      </li>
+    {% empty %}
+      <li class="notification-empty">No notifications.</li>
+    {% endfor %}
+  </ul>
+</div>
 {% endblock %}

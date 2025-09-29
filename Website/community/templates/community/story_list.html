@@ -1,17 +1,25 @@
 {% extends "Main/base.html" %}
 {% block content %}
-<h2>Stories</h2>
-{% if stories %}
-<ul>
-    {% for story in stories %}
-        <li>
-            <a href="{% url 'community:story_detail' story.pk %}">{{ story.title }}</a>
-            — by {{ story.author.username }} on {{ story.created_at|date:"D, d M Y" }}
+<div class="stories_page">
+  <h2 class="stories_title">Stories</h2>
+
+  {% if stories %}
+    <ul class="stories_list">
+      {% for story in stories %}
+        <li class="story_item">
+          <a href="{% url 'community:story_detail' story.pk %}" class="story_link">
+            {{ story.title }}
+          </a>
+          <span class="story_meta">— by {{ story.author.username }} on {{ story.created_at|date:"D, d M Y" }}</span>
         </li>
-    {% endfor %}
-</ul>
-{% else %}
-<p>No stories yet.</p>
-{% endif %}
-<a href="{% url 'community:submit_story' %}">Submit Your Story</a>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="no_stories">No stories yet.</p>
+  {% endif %}
+
+  <div class="stories_cta">
+    <a href="{% url 'community:submit_story' %}" class="btn-primary">Submit Your Story</a>
+  </div>
+</div>
 {% endblock %}

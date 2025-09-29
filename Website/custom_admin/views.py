@@ -7,12 +7,17 @@ from community.models import Photo, Story
 from .models import AdminLog, Report
 from django.db.models import Q
 def staff_required(user):
-    return user.is_staff_account
+    if user.is_staff_account or user.is_superuser_account:
+        answer = True
+    else:
+        answer = False
+    return answer
 
 @login_required
 @user_passes_test(staff_required)
 def dashboard(request):
     search_query = request.GET.get('search', '')
+       
     users = User.objects.filter(school=request.user.school)
     if search_query:
         users = users.filter(
