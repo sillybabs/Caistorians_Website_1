@@ -69,7 +69,7 @@
       <!-- Admin -->
       {% if user.is_staff_account %}
       <li><a href="{% url 'custom_admin:dashboard' %}">Admin Dashboard</a></li>
-      <li><a href="{% url 'schools:edit_school' school.id %}">Edit School</a></li>
+      <li><a href="{% url 'schools:edit_school' user.school.id %}">Edit School</a></li>
 
         {% if user.is_superuser_account or user.is_superuser %}
           <li><a href="{% url 'schools:create_school' %}">Create School</a></li>
