@@ -1,18 +1,36 @@
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
+{% extends "Main/base.html" %}
+{% load static %}
 
-    <h3>Historical Images</h3>
-    {{ historical_formset.management_form }}
-    {% for hform in historical_formset %}
-        {{ hform.as_p }}
-    {% endfor %}
+{% block content %}
+<div class="create-school_container">
+    <form method="post" enctype="multipart/form-data" class="create-school_form">
+        {% csrf_token %}
+        <div class="create-school_section">
+            <h2 class="create-school_title">School Details</h2>
+            {{ form.as_p }}
+        </div>
 
-    <h3>Alumni Highlights</h3>
-    {{ alumni_formset.management_form }}
-    {% for aform in alumni_formset %}
-        {{ aform.as_p }}
-    {% endfor %}
+        <div class="create-school_section">
+            <h2 class="create-school_title">Historical Images</h2>
+            {{ historical_formset.management_form }}
+            {% for hform in historical_formset %}
+                <div class="create-school_inlineform">
+                    {{ hform.as_p }}
+                </div>
+            {% endfor %}
+        </div>
 
-    <button type="submit">Create School</button>
-</form>
+        <div class="create-school_section">
+            <h2 class="create-school_title">Alumni Highlights</h2>
+            {{ alumni_formset.management_form }}
+            {% for aform in alumni_formset %}
+                <div class="create-school_inlineform">
+                    {{ aform.as_p }}
+                </div>
+            {% endfor %}
+        </div>
+
+        <button type="submit" class="create-school_ctabutton">Create School</button>
+    </form>
+</div>
+{% endblock %}

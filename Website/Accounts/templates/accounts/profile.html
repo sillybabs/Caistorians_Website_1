@@ -26,7 +26,7 @@
                 <li><strong>Bio:</strong> {{ user.bio|default:"Not provided" }}</li>
                 <li><strong>LinkedIn:</strong>
                     {% if user.linkedin_url %}
-                    <a href="{{ user.linkedin_url }}" target="_blank">{{ user.linkedin_url }}</a>
+                    <a class="social" href="{{ user.linkedin_url }}" target="_blank">{{ user.linkedin_url }}</a>
                     {% else %}
                     <span class="text-muted">Not provided</span>
                     {% endif %}
@@ -36,7 +36,7 @@
                 <li><strong>Is Staff:</strong> {{ user.is_staff_account }}</li>
                 <li><strong>Is Active:</strong> {{ user.is_active }}</li>
             </ul>
-            <a href="{% url 'Accounts:edit_profile' %}" class="btn btn-primary">Edit Profile</a>
+            <a href="{% url 'Accounts:edit_profile' %}" class="btn-primary">Edit Profile</a>
         </div>
     </div>
 </div>

@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     {% load static %}
-    <title>{% block title %}The Alumni Society{% endblock %}</title>
+    {% if not user.school.logo %}
+      <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/png">
+    {% else %}
+      <link rel="icon" href="{  'user.school.logo.url' }" type="image/png">
+    {% endif %}
+    <meta charset="UTF-8">
+    <title>{% block title %}The Caistorians' Association{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'Main/style.css' %}">
 </head>
 <body>
@@ -16,8 +21,9 @@
           {% if user.is_authenticated %}
             <img class="navbar-logo" src="{{ user.school.logo.url }}">
           {% else %}
-            The Alumni Society
-          {% endif %}
+            <img class="navbar-logo" src="{% static 'images/The Alumni Society Logo.png' %}" alt="Logo">
+            <p>The Caistorians' Association
+            {% endif %}
         </p>
       </a>
     </div>
@@ -66,19 +72,20 @@
         </ul>
       </li>
 
-      <!-- Admin -->
-      {% if user.is_staff_account %}
-      <li><a href="{% url 'schools:edit_school' user.school.id %}">Edit School</a></li>
 
-        {% if user.is_superuser_account or user.is_superuser or user.is_staff_account %}
-          <li><a href="{% url 'custom_admin:dashboard' %}">Admin Dashboard</a></li>
-          <li><a href="{% url 'schools:create_school' %}">Create School</a></li>
-        {% endif %}
-      {% endif %}
 
       {% else %}
       <li><a href="{% url 'Accounts:login' %}">Login</a></li>
       <li><a href="{% url 'Accounts:create_account' %}">Create Account</a></li>
+      {% endif %}
+      <!-- Admin -->
+      {% if user.is_staff_account %}
+      <li><a href="{% url 'schools:edit_school' user.school.id %}">Edit School</a></li>
+      {% endif %}
+
+      {% if user.is_superuser_account or user.is_superuser %}
+        <li><a href="{% url 'custom_admin:dashboard' %}">Admin Dashboard</a></li>
+        <li><a href="{% url 'schools:create_school' %}">Create School</a></li>
       {% endif %}
     </ul>
   </div>
@@ -94,7 +101,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; {{ year|default:2024 }} Caistorians Website. All rights reserved.</p>
+        <p>&copy; {{ year|default:2025 }} The Alumni Society. All rights reserved.</p>
     </footer>
 </body>
 </html>
