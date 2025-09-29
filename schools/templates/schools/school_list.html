@@ -1,0 +1,21 @@
+{% extends "Main/base.html" %}
+{% load static %}
+{% block content %}
+<h2>Schools</h2>
+<ul>
+    {% for school in schools %}
+    <a href="{% url 'schools:school_home' school.name %}">
+        <li>
+            <h3>{{ school.name }}</h3>
+            {% if school.logo %}
+            <img src="{{ school.logo.url }}" alt="{{ school.name }} Logo" style="max-width: 200px; max-height: 200px;">
+            {% endif %}
+            <p>{{ school.description }}</p>
+            <p><strong>Address:</strong> {{ school.address }}</p>
+        </li>
+    </a>
+    {% empty %}
+    <li>No schools available.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
