@@ -22,13 +22,12 @@
         <div class="school_box">
             <h3>Official School News</h3>
             <p>Find our newsletters and official stories.</p>
-            <a href="#">Read Extracts</a>
-            <a href="#">Past Editions</a>
+            <a href="{% url 'community:story_list' %}">Read Extracts</a>
         </div>
         <div class="school_box">
             <h3>Alumni News</h3>
-            <p>We'd love to feature your alumni news. Contact {{ school.contact_name }}.</p>
-            <a href="#">Submit Your Story</a>
+            <p>We'd love to feature your alumni news.</p>
+            <a href="{% url 'news:updates' %}">Submit Your Story</a>
         </div>
         <div class="school_box">
             <h3>Events & Highlights</h3>
