@@ -1,28 +1,45 @@
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
+{% extends "Main/base.html" %}
+{% load static %}
 
-    <h3>Historical Images</h3>
-    {{ historical_formset.management_form }}
-    {% for form in historical_formset %}
-        <div class="historical-image-form">
+{% block content %}
+<div class="edit-school-container">
+    <h2 class="edit-school_title">Edit School</h2>
+
+    <form method="post" enctype="multipart/form-data" class="edit-school_form">
+        {% csrf_token %}
+        <div class="edit-school_mainform">
             {{ form.as_p }}
-            {% if form.instance.pk %}
-                <img src="{{ form.instance.image.url }}" height="100">
-            {% endif %}
         </div>
-    {% endfor %}
 
-    <h3>Alumni Highlights</h3>
-    {{ alumni_formset.management_form }}
-    {% for form in alumni_formset %}
-        <div class="alumni-form">
-            {{ form.as_p }}
-            {% if form.instance.pk %}
-                <img src="{{ form.instance.photo.url }}" height="100">
-            {% endif %}
+        <h3 class="edit-school_section-title">Historical Images</h3>
+        <div class="edit-school_section">
+            {{ historical_formset.management_form }}
+            {% for form in historical_formset %}
+                <div class="edit-school_formset-item">
+                    {{ form.as_p }}
+                    {% if form.instance.pk %}
+                        <img src="{{ form.instance.image.url }}" class="edit-school_image-preview">
+                    {% endif %}
+                </div>
+            {% endfor %}
         </div>
-    {% endfor %}
 
-    <button type="submit">Save Changes</button>
-</form>
+        <h3 class="edit-school_section-title">Alumni Highlights</h3>
+        <div class="edit-school_section">
+            {{ alumni_formset.management_form }}
+            {% for form in alumni_formset %}
+                <div class="edit-school_formset-item">
+                    {{ form.as_p }}
+                    {% if form.instance.pk %}
+                        <img src="{{ form.instance.photo.url }}" class="edit-school_image-preview">
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="edit-school_submit">
+            <button type="submit" class="edit-school_button">Save Changes</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

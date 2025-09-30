@@ -1608,7 +1608,78 @@ textarea {
     transform: translateY(-2px);
 }
 
+/*--------------------------------------------------EDIT SCHOOL-------------------------------------------------*/
 
+/* ==== Edit School Page ==== */
+.edit-school-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
 
+.edit-school_title {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
 
+.edit-school_form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
 
+.edit-school_section-title {
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #444;
+}
+
+.edit-school_section {
+    background: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.edit-school_formset-item {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px dashed #ccc;
+}
+
+.edit-school_formset-item:last-child {
+    border-bottom: none;
+}
+
+.edit-school_image-preview {
+    display: block;
+    margin-top: 0.5rem;
+    max-height: 120px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+}
+
+.edit-school_submit {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.edit-school_button {
+    background: #007bff; /* Bootstrap blue */
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.edit-school_button:hover {
+    background: #0056b3;
+}
