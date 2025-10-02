@@ -19,9 +19,12 @@ def dashboard(request):
     search_query = request.GET.get('search', '')
 <<<<<<< Updated upstream:custom_admin/views.py
 <<<<<<< Updated upstream:custom_admin/views.py
+<<<<<<< Updated upstream:custom_admin/views.py
        
     users = User.objects.filter(school=request.user.school)
 =======
+=======
+>>>>>>> Stashed changes:Website/custom_admin/views.py
 =======
 >>>>>>> Stashed changes:Website/custom_admin/views.py
     if request.user.school:
@@ -29,6 +32,9 @@ def dashboard(request):
     else:
         users = User.objects.all()
 <<<<<<< Updated upstream:custom_admin/views.py
+<<<<<<< Updated upstream:custom_admin/views.py
+>>>>>>> Stashed changes:Website/custom_admin/views.py
+=======
 >>>>>>> Stashed changes:Website/custom_admin/views.py
 =======
 >>>>>>> Stashed changes:Website/custom_admin/views.py
