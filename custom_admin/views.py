@@ -18,13 +18,19 @@ def staff_required(user):
 def dashboard(request):
     search_query = request.GET.get('search', '')
 <<<<<<< Updated upstream:custom_admin/views.py
+<<<<<<< Updated upstream:custom_admin/views.py
        
     users = User.objects.filter(school=request.user.school)
 =======
+=======
+>>>>>>> Stashed changes:Website/custom_admin/views.py
     if request.user.school:
         users = User.objects.filter(school=request.user.school)
     else:
         users = User.objects.all()
+<<<<<<< Updated upstream:custom_admin/views.py
+>>>>>>> Stashed changes:Website/custom_admin/views.py
+=======
 >>>>>>> Stashed changes:Website/custom_admin/views.py
     if search_query:
         users = users.filter(
