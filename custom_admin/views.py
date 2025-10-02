@@ -17,8 +17,15 @@ def staff_required(user):
 @user_passes_test(staff_required)
 def dashboard(request):
     search_query = request.GET.get('search', '')
+<<<<<<< Updated upstream:custom_admin/views.py
        
     users = User.objects.filter(school=request.user.school)
+=======
+    if request.user.school:
+        users = User.objects.filter(school=request.user.school)
+    else:
+        users = User.objects.all()
+>>>>>>> Stashed changes:Website/custom_admin/views.py
     if search_query:
         users = users.filter(
             Q(username__icontains=search_query) |
