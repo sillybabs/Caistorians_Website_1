@@ -5,7 +5,7 @@
     {% if not user.school.logo %}
       <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/png">
     {% else %}
-      <link rel="icon" href="{  'user.school.logo.url' }" type="image/png">
+      <link rel="icon" href="{{ user.school.logo.url }}" type="image/png">
     {% endif %}
     <meta charset="UTF-8">
     <title>{% block title %}The Caistorians' Association{% endblock %}</title>

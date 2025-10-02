@@ -337,12 +337,338 @@ main {
 
 
 
+
+/* CREATE EVENT PAGE */
+.create-event_container {
+    max-width: 600px;
+    margin: 2rem auto;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.create-event_title {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+.create-event_form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.create-event_field {
+    display: flex;
+    flex-direction: column;
+}
+
+.create-event_field label {
+    margin-bottom: 0.3rem;
+    font-weight: 500;
+    color: #444;
+}
+
+.create-event_field input,
+.create-event_field textarea,
+.create-event_field select {
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.2s ease;
+}
+
+.create-event_field input:focus,
+.create-event_field textarea:focus,
+.create-event_field select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.create-event_submit {
+    background-color: #007bff; /* Same blue as edit profile save */
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background-color 0.2s ease;
+}
+
+.create-event_submit:hover {
+    background-color: #0056b3;
+}
+
+.create-event_back {
+    display: block;
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #007bff;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.create-event_back:hover {
+    text-decoration: underline;
+}
+
+/* EVENT LIST PAGE */
+.event-list_container {
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 1.5rem 2rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.event-list_title {
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+.event-list_items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.event-list_item {
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.event-list_item:last-child {
+    border-bottom: none;
+}
+
+.event-list_link {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #007bff;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 0.3rem;
+    transition: color 0.2s ease;
+}
+
+.event-list_link:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.event-list_meta {
+    font-size: 0.95rem;
+    color: #666;
+}
+
+.event-list_meta span {
+    margin: 0 0.4rem;
+    color: #aaa;
+}
+
+.event-list_empty {
+    text-align: center;
+    padding: 2rem;
+    color: #777;
+    font-style: italic;
+}
+
+
+/* EVENT DETAIL PAGE */
+.event-detail_container {
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.event-detail_title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #333;
+    text-align: center;
+}
+
+.event-detail_description {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    color: #555;
+    text-align: justify;
+}
+
+.event-detail_info p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    color: #444;
+}
+
+.event-detail_rsvp-form {
+    margin: 2rem 0;
+    padding: 1rem;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    background: #f9f9f9;
+}
+
+.event-detail_rsvp-form label {
+    font-weight: 600;
+    margin-right: 0.5rem;
+}
+
+.event-detail_btn {
+    margin-left: 1rem;
+    padding: 0.4rem 1rem;
+    border: none;
+    border-radius: 6px;
+    background: #007bff;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.event-detail_btn:hover {
+    background: #0056b3;
+}
+
+.event-detail_rsvp-summary {
+    margin-top: 2rem;
+}
+
+.event-detail_rsvp-summary h3 {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.event-detail_rsvp-summary ul {
+    list-style: none;
+    padding: 0;
+}
+
+.event-detail_rsvp-summary li {
+    padding: 0.3rem 0;
+    font-size: 1rem;
+    color: #444;
+}
+
+.event-detail_rsvp-summary .yes {
+    color: green;
+    font-weight: 600;
+}
+
+.event-detail_rsvp-summary .maybe {
+    color: orange;
+    font-weight: 600;
+}
+
+.event-detail_rsvp-summary .no {
+    color: red;
+    font-weight: 600;
+}
+
+.event-detail_back {
+    display: inline-block;
+    margin-top: 2rem;
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.event-detail_back:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* RSVP PAGE */
+.event-rsvp_container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.event-rsvp_title {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+    text-align: center;
+}
+
+.event-rsvp_info {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border-left: 4px solid #007bff;
+    background: #f9f9f9;
+    border-radius: 6px;
+}
+
+.event-rsvp_info p {
+    margin: 0.3rem 0;
+    font-size: 1rem;
+    color: #444;
+}
+
+.event-rsvp_form {
+    margin-bottom: 1.5rem;
+}
+
+.event-rsvp_form p {
+    margin-bottom: 1rem;
+}
+
+.event-rsvp_btn {
+    padding: 0.5rem 1.2rem;
+    border: none;
+    border-radius: 6px;
+    background: #28a745;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.event-rsvp_btn:hover {
+    background: #218838;
+}
+
+.event-rsvp_back {
+    display: inline-block;
+    margin-top: 1rem;
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.event-rsvp_back:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+
+
 /*School Homepage ----------------------------------------------------------------------------------------------------------------Schol Homepage ------------------------*/
 /* Hero Section */
 .school_hero {
     position: relative;
     width: 100%;
-    height: 500px;
+    height: 600px;
     overflow: hidden;
 }
 .school_hero_image {

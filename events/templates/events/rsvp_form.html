@@ -1,15 +1,20 @@
 {% extends "Main/base.html" %}
 
 {% block content %}
-<h2>RSVP for "{{ event.title }}"</h2>
-<p><strong>When:</strong> {{ event.start_time|date:"D, d M Y H:i" }} – {{ event.end_time|date:"D, d M Y H:i" }}</p>
-<p><strong>Location:</strong> {{ event.location }}</p>
+<div class="event-rsvp_container">
+    <h2 class="event-rsvp_title">RSVP for "{{ event.title }}"</h2>
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Submit RSVP</button>
-</form>
+    <div class="event-rsvp_info">
+        <p><strong>When:</strong> {{ event.start_time|date:"D, d M Y H:i" }} – {{ event.end_time|date:"D, d M Y H:i" }}</p>
+        <p><strong>Location:</strong> {{ event.location }}</p>
+    </div>
 
-<a href="{% url 'events:event_detail' event.pk %}">Back to Event</a>
+    <form method="post" class="event-rsvp_form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="event-rsvp_btn">Submit RSVP</button>
+    </form>
+
+    <a href="{% url 'events:event_detail' event.pk %}" class="event-rsvp_back">← Back to Event</a>
+</div>
 {% endblock %}

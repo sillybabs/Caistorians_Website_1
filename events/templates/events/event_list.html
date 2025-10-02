@@ -1,16 +1,22 @@
 {% extends "Main/base.html" %}
+
 {% block content %}
-<h2>Upcoming Events</h2>
-<ul>
-{% for event in events %}
-    <li>
-        <a href="{% url 'events:event_detail' event.pk %}">
-            {{ event.title }}
-        </a>
-        — {{ event.date|date:"D, d M Y H:i" }} at {{ event.location }}
-    </li>
-{% empty %}
-    <li>No events yet.</li>
-{% endfor %}
-</ul>
+<div class="event-list_container">
+    <h2 class="event-list_title">Upcoming Events</h2>
+
+    <ul class="event-list_items">
+        {% for event in events %}
+            <li class="event-list_item">
+                <a href="{% url 'events:event_detail' event.pk %}" class="event-list_link">
+                    {{ event.title }}
+                </a>
+                <div class="event-list_meta">
+                    {{ event.date|date:"D, d M Y H:i" }} <span>•</span> {{ event.location }}
+                </div>
+            </li>
+        {% empty %}
+            <li class="event-list_empty">No events yet.</li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}

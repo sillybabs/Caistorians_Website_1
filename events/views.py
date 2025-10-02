@@ -59,7 +59,7 @@ def event_create(request):
             return redirect("events:event_list")
     else:
         form = EventForm()
-    return render(request, "events/event_form.html", {"form": form})
+    return render(request, "events/create_event.html", {"form": form})
 
 # events/views.py
 from django.http import HttpResponseForbidden

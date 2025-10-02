@@ -17,27 +17,15 @@ def staff_required(user):
 @user_passes_test(staff_required)
 def dashboard(request):
     search_query = request.GET.get('search', '')
-<<<<<<< Updated upstream:custom_admin/views.py
-<<<<<<< Updated upstream:custom_admin/views.py
-<<<<<<< Updated upstream:custom_admin/views.py
        
     users = User.objects.filter(school=request.user.school)
-=======
-=======
->>>>>>> Stashed changes:Website/custom_admin/views.py
-=======
->>>>>>> Stashed changes:Website/custom_admin/views.py
+
+
     if request.user.school:
         users = User.objects.filter(school=request.user.school)
     else:
         users = User.objects.all()
-<<<<<<< Updated upstream:custom_admin/views.py
-<<<<<<< Updated upstream:custom_admin/views.py
->>>>>>> Stashed changes:Website/custom_admin/views.py
-=======
->>>>>>> Stashed changes:Website/custom_admin/views.py
-=======
->>>>>>> Stashed changes:Website/custom_admin/views.py
+
     if search_query:
         users = users.filter(
             Q(username__icontains=search_query) |
@@ -143,15 +131,3 @@ def resolve_report(request, report_id):
     AdminLog.objects.create(admin=request.user, action=f"Resolved report #{report.id}", school=request.user.school)
     return redirect("custom_admin:dashboard")
 
-
-
-def upload_school_image(request):
-    if request.method == 'POST':
-        form = SchoolHomepageImageForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('custom_admin:upload_school_image')  # or some success page
-    else:
-        form = SchoolHomepageImageForm()
-    
-    return render(request, 'custom_admin/upload_school_image.html', {'form': form})
