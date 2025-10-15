@@ -59,7 +59,7 @@ def delete_user(request, user_id):
     user = get_object_or_404(User, id=user_id)
     user.delete()
     messages.success(request, "User deleted")
-    AdminLog.objects.create(admin=request.user, action=f"Deleted user {user.username}", school=request.user.school)
+    AdminLog.objects.create(admin=request.user, action=f"Deleted user {user.username}", school=user.school)
     return redirect("custom_admin:dashboard")
 
 # ------------------------

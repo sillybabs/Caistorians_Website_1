@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     {% load static %}
-    {% if not user.school.logo %}
-      <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/png">
-    {% else %}
+    {% if user.is_authenticated and user.school.logo %}
       <link rel="icon" href="{{ user.school.logo.url }}" type="image/png">
+    {% else %}
+      <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/png">
     {% endif %}
     <meta charset="UTF-8">
     <title>{% block title %}The Caistorians' Association{% endblock %}</title>
@@ -79,6 +79,8 @@
       <!-- Admin -->
       {% if user.is_staff_account %}
       <li><a href="{% url 'schools:edit_school' user.school.id %}">Edit School</a></li>
+      <li><a href="{% url 'custom_admin:dashboard' %}">Admin Dashboard</a></li>
+
       {% endif %}
 
       {% if user.is_superuser_account or user.is_superuser %}

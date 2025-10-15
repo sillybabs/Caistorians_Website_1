@@ -1,7 +1,6 @@
 {% extends "Main/base.html" %}
-
 {% block content %}
-<body>
+<div class="create-account-page">
     <h2>Create Account</h2>
     <form method="post">
         {% csrf_token %}
@@ -13,5 +12,5 @@
         <button type="submit">Sign Up</button>
     </form>
     <p>Already have an account? <a href="{% url 'Accounts:login' %}">Login here</a>.</p>
-</body>
+</div>
 {% endblock %}

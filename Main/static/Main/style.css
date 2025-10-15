@@ -2009,3 +2009,224 @@ textarea {
 .edit-school_button:hover {
     background: #0056b3;
 }
+
+
+/* --- Create Account Page --- */
+.create-account-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem 1rem;
+    background: #f9fafc;
+    min-height: 80vh;
+}
+
+.create-account-page h2 {
+    font-size: 2rem;
+    color: #1d4ed8; /* Oxford blue tone */
+    margin-bottom: 1.5rem;
+}
+
+.create-account-page form {
+    background: white;
+    padding: 2rem 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 450px;
+}
+
+.create-account-page form p {
+    margin-bottom: 1rem;
+}
+
+.create-account-page input[type="text"],
+.create-account-page input[type="email"],
+.create-account-page input[type="password"],
+.create-account-page select {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+.create-account-page input:focus,
+.create-account-page select:focus {
+    border-color: #2563eb;
+    outline: none;
+}
+
+.create-account-page label {
+    display: block;
+    font-size: 0.95rem;
+    color: #374151;
+    margin: 0.5rem 0;
+}
+
+.create-account-page button {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    width: 100%;
+    transition: background 0.2s;
+}
+
+.create-account-page button:hover {
+    background-color: #1e40af;
+}
+
+.create-account-page p {
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.create-account-page a {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.create-account-page a:hover {
+    text-decoration: underline;
+}
+
+
+/* Story Detail Page */
+.story-detail-page {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fefefe;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+}
+
+.story-title {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #222;
+}
+
+.story-meta {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.story-content p {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.story-actions {
+    margin-top: 30px;
+}
+
+.story-actions .btn {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    margin-right: 10px;
+}
+
+.story-actions .btn-back {
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+.story-actions .btn-back:hover {
+    background-color: #e0e0e0;
+}
+
+.story-actions .btn-delete {
+    background-color: #e74c3c;
+    color: #fff;
+    border: 1px solid #c0392b;
+}
+
+.story-actions .btn-delete:hover {
+    background-color: #c0392b;
+}
+
+
+/* Delete Confirmation Page */
+.delete-confirm-page {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 25px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+
+.delete-confirm-page h2 {
+    font-size: 1.8rem;
+    color: #222;
+    margin-bottom: 20px;
+}
+
+.delete-confirm-page p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.delete-confirm-page img {
+    margin: 15px 0;
+    border-radius: 8px;
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ccc;
+}
+
+.delete-confirm-page form {
+    margin-top: 25px;
+}
+
+.delete-confirm-page button,
+.delete-confirm-page a {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    text-decoration: none;
+    margin: 5px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.delete-confirm-page button {
+    background-color: #e74c3c;
+    color: #fff;
+    border: 1px solid #c0392b;
+}
+
+.delete-confirm-page button:hover {
+    background-color: #c0392b;
+}
+
+.delete-confirm-page a {
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+.delete-confirm-page a:hover {
+    background-color: #e0e0e0;
+}
