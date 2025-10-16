@@ -82,7 +82,7 @@
             <td>{{ report.reporter.username }}</td>
             <td>{{ report.reason }}</td>
             <td>
-                <a href="{% url 'custom_:resolve_report' report.id %}" class="btn admin-action-btn">Mark Resolved</a>
+                <a href="{% url 'custom_admin:resolve_report' report.id %}" class="btn admin-action-btn">Mark Resolved</a>
             </td>
         </tr>
         {% empty %}
@@ -90,11 +90,34 @@
         {% endfor %}
     </table>
 
+    <h2>Chat Logs</h2>
+    <table class="admin-table">
+        <tr>
+            <th>From</th>
+            <th>To</th>
+            <th>Message</th>
+            <th>Date</th>
+        </tr>
+        {% for chat in chat_logs %}
+        <tr>
+            <td>{{ chat.sender.username }}</td>
+            <td>{{ chat.recipient.username }}</td>
+            <td>{{ chat.body|truncatechars:80 }}</td>
+            <td>{{ chat.timestamp|date:"d M Y H:i" }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="4">No chat logs available.</td></tr>
+        {% endfor %}
+    </table>
+
+
+
     <h2>Recent Admin Actions</h2>
     <ul class="admin-log">
         {% for log in logs %}
         <li>{{ log.created_at }} — {{ log.admin.username }}: {{ log.action }}</li>
         {% endfor %}
     </ul>
+
 </div>
 {% endblock %}

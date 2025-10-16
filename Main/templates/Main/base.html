@@ -2,10 +2,17 @@
 <html lang="en">
 <head>
     {% load static %}
+<<<<<<< Updated upstream
     {% if user.is_authenticated and user.school.logo %}
       <link rel="icon" href="{{ user.school.logo.url }}" type="image/png">
     {% else %}
       <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/png">
+=======
+    {% if not user.school.logo %}
+      <link rel="icon" href="{% static 'images/Favicon.png' %}" type="image/png">
+    {% else %}
+      <link rel="icon" href="{% static 'images/Favicon.png' %}" type="image/png">
+>>>>>>> Stashed changes
     {% endif %}
     <meta charset="UTF-8">
     <title>{% block title %}The Caistorians' Association{% endblock %}</title>
@@ -21,7 +28,7 @@
           {% if user.is_authenticated %}
             <img class="navbar-logo" src="{{ user.school.logo.url }}">
           {% else %}
-            <img class="navbar-logo" src="{% static 'images/The Alumni Society Logo.png' %}" alt="Logo">
+            <img class="navbar-logo" src="{% static 'images/Caistor_Grammar_School_Badge.png' %}" alt="Logo">
             {% endif %}
       </a>
     </div>
@@ -101,7 +108,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; {{ year|default:2025 }} The Alumni Society. All rights reserved.</p>
+        <p>&copy; {{ year|default:2025 }} The Caistorians' Association. All rights reserved.</p>
     </footer>
 </body>
 </html>
