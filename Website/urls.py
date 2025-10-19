@@ -29,7 +29,7 @@ urlpatterns = [
     path('schools/', include('schools.urls', namespace='schools')),  # Schools app
     path('news/', include('news.urls', namespace='news')),  # News app
     path('notifications/', include('notifications.urls', namespace='notifications')),  # Notifications app
-
+    path('fundraisers/', include(('fundraisers.urls'), namespace='fundraisers')),
 ]
 
 if settings.DEBUG:

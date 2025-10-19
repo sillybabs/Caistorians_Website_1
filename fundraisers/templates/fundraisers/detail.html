@@ -1,0 +1,30 @@
+{% extends "Main/base.html" %}
+
+{% block content %}
+
+<h2>{{ fundraiser.title }}</h2>
+<p>{{ fundraiser.description }}</p>
+<p>Raised £{{ fundraiser.total_raised }} / £{{ fundraiser.goal_amount }}</p>
+
+<form id="donate-form">
+  {% csrf_token %}
+  <input type="number" name="amount" placeholder="Amount (£)" min="1" required>
+  <button type="submit">Donate</button>
+</form>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+const stripe = Stripe("{{ STRIPE_PUBLISHABLE_KEY }}");
+document.getElementById("donate-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const amount = e.target.amount.value;
+  const response = await fetch("{% url 'fundraisers:checkout' fundraiser.id %}", {
+    method: "POST",
+    headers: {"Content-Type": "application/x-www-form-urlencoded"},
+    body: new URLSearchParams({amount}),
+  });
+  const data = await response.json();
+  stripe.redirectToCheckout({ sessionId: data.id });
+});
+</script>
+{% endblock %}

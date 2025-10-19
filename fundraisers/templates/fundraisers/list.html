@@ -1,0 +1,15 @@
+{% extends "Main/base.html" %}
+
+{% block content %}
+
+<h2>Active Fundraisers</h2>
+<a href="{% url 'fundraisers:create_fundraiser' %}">+ Create Fundraiser</a>
+<ul>
+{% for f in fundraisers %}
+  <li>
+    <a href="{% url 'fundraisers:fundraiser_detail' f.id %}">{{ f.title }}</a> - £{{ f.total_raised }} raised / £{{ f.goal_amount }}
+  </li>
+{% endfor %}
+</ul>
+
+{% endblock %}
