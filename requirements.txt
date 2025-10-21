@@ -1,1 +1,4 @@
-django pillow stripe python-dotenv
+django
+pillow
+stripe
+python-dotenv

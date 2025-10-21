@@ -38,8 +38,7 @@ STATICFILES_DIRS = [
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #
-ALLOWED_HOSTS = ['10.25.130.184', 'localhost']
-
+ALLOWED_HOSTS = ['127.0.0.1','10.25.130.184', 'localhost']
 
 # Application definition
 
@@ -153,3 +152,14 @@ AUTH_USER_MODEL = 'Accounts.User'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'caistoriansassociation@gmail.com'
+EMAIL_HOST_PASSWORD = 'pdhr yikh ahej ytja'  # Gmail app password, not normal password
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+#remember to use 2FA and app passwords when properly launching
