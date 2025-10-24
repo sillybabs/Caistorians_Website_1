@@ -2,12 +2,52 @@
 {% block content %}
 <div class="story-detail-page">
     <h2 class="story-title">{{ story.title }}</h2>
-    <p class="story-meta"><strong>By:</strong> {{ story.author.username }} | 
-        <strong>Date:</strong> {{ story.created_at|date:"D, d M Y H:i" }}</p>
-    
-    <div class="story-content">
-        <p>{{ story.content }}</p>
-    </div>
+    <p class="story-meta">
+        <strong>By:</strong> {{ story.author.username }} | 
+        <strong>Date:</strong> {{ story.created_at|date:"D, d M Y H:i" }}
+    </p>
+
+    {% if has_paid or user == story.author or user.is_staff %}
+        <!-- Story content (visible if paid or author/staff) -->
+        <div class="story-content">
+            <p>{{ story.content }}</p>
+        </div>
+    {% else %}
+        <!-- Paywall section -->
+        <div class="story-paywall">
+            <p>This story is behind a paywall. Pay to unlock full access.</p>
+            <form id="payment-form" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="amount" value="200"> <!-- £2.00 -->
+                <button type="submit" id="checkout-button" class="btn btn-primary">
+                    Unlock for £2
+                </button>
+            </form>
+        </div>
+
+        <script src="https://js.stripe.com/v3/"></script>
+        <script>
+            const stripe = Stripe("{{ STRIPE_PUBLISHABLE_KEY }}");
+
+            document.getElementById('payment-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const formData = new FormData(e.target);
+                const response = await fetch("{% url 'fundraisers:checkout' story.id %}", {
+                    method: 'POST',
+                    headers: {'X-CSRFToken': formData.get('csrfmiddlewaretoken')},
+                    body: formData
+                });
+                const data = await response.json();
+
+                if (data.error) {
+                    alert(data.error);
+                    return;
+                }
+
+                stripe.redirectToCheckout({ sessionId: data.id });
+            });
+        </script>
+    {% endif %}
 
     <div class="story-actions">
         <a href="{% url 'community:story_list' %}" class="btn btn-back">Back to Stories</a>

@@ -17,7 +17,8 @@ class Fundraiser(models.Model):
 
 
 class Payment(models.Model):
-    fundraiser = models.ForeignKey(Fundraiser, on_delete=models.CASCADE)
+    fundraiser = models.ForeignKey(Fundraiser, on_delete=models.CASCADE, null=True, blank=True)
+    story = models.ForeignKey('community.Story', on_delete=models.CASCADE, null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     stripe_payment_intent = models.CharField(max_length=255)

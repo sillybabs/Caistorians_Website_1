@@ -4,8 +4,8 @@ from .models import Photo, Story
 from .forms import PhotoUploadForm, StoryForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponseForbidden
-
-
+from fundraisers.models import Payment
+from Website import settings
 # --- Photos ---
 @login_required
 def upload_photo(request):
@@ -67,6 +67,14 @@ def story_list(request):
     #stories = Story.objects.order_by("-created_at") -----For testing purposes, show unapproved stories too
     return render(request, "community/story_list.html", {"stories": stories})
 
+@login_required
 def story_detail(request, pk):
-    story = get_object_or_404(Story, pk=pk, approved=True)
-    return render(request, "community/story_detail.html", {"story": story})
+    story = get_object_or_404(Story, id=pk)
+    has_paid = Payment.objects.filter(user=request.user, story=story).exists()
+
+    return render(request, 'community/story_detail.html', {
+        'story': story,
+        'has_paid': has_paid,
+        'STRIPE_PUBLISHABLE_KEY': settings.STRIPE_PUBLISHABLE_KEY,
+    })
+
