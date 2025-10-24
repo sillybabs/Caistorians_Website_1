@@ -4,7 +4,7 @@ from .models import Photo, Story
 from .forms import PhotoUploadForm, StoryForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponseForbidden
-from fundraisers.models import Payment
+from fundraisers.models import *
 from Website import settings
 # --- Photos ---
 @login_required
@@ -70,11 +70,15 @@ def story_list(request):
 @login_required
 def story_detail(request, pk):
     story = get_object_or_404(Story, id=pk)
-    has_paid = Payment.objects.filter(user=request.user, story=story).exists()
+    
+    record = UnlockStories.objects.filter(user=request.user).first()
+    print(record)
+    has_paid = record is not None and record.paid
 
     return render(request, 'community/story_detail.html', {
         'story': story,
         'has_paid': has_paid,
         'STRIPE_PUBLISHABLE_KEY': settings.STRIPE_PUBLISHABLE_KEY,
     })
+
 

@@ -6,7 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 import stripe
 from notifications.utils import create_notification
-from .models import Fundraiser, Payment
+from .models import *
 from .forms import FundraiserForm
 from decimal import Decimal
 from django.contrib.auth import get_user_model
@@ -78,6 +78,7 @@ def stripe_webhook(request):
     if event['type'] == 'checkout.session.completed':
         session = event['data']['object']
         metadata = session['metadata']
+        print("SESSION METADATA:", session.get('metadata'))
         user = User.objects.get(pk=metadata['user_id'])
         payment_amount = Decimal(session['amount_total']) / Decimal('100')
 
@@ -100,7 +101,9 @@ def stripe_webhook(request):
             )
             fundraiser.total_raised += payment_amount
             fundraiser.save()
-
+        if payment_amount >= 2:
+            yo = UnlockStories.objects.create(user=user, paid = True)
+            print(yo)
     return HttpResponse(status=200)
 
 def success(request):

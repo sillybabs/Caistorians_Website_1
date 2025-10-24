@@ -12,4 +12,6 @@ urlpatterns = [
     path('webhook/', views.stripe_webhook, name='stripe_webhook'),
     path('success/', views.success, name='fundraiser_success'),
     path('cancel/', views.cancel, name='fundraiser_cancel'),
+    path('<int:story_id>/checkout/', views.create_story_checkout_session, name='create_story_checkout_session'),
+
 ]

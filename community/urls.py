@@ -13,4 +13,5 @@ urlpatterns = [
     path("stories/", views.story_list, name="story_list"),
     path("stories/<int:pk>/", views.story_detail, name="story_detail"),
     path("stories/<int:pk>/delete/", views.delete_story, name="delete_story"),
+
 ]
