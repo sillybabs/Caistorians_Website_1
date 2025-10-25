@@ -7,13 +7,17 @@
         <strong>Date:</strong> {{ story.created_at|date:"D, d M Y H:i" }}
     </p>
 
-    {% if has_paid or user == story.author or user.is_staff %}
-        <!-- Story content (visible if paid or author/staff) -->
+    {% if has_paid or user == story.author or user.is_staff_account or user.is_admin_account or user.is_admin or user.is_staff %}
         <div class="story-content">
-            <p>{{ story.content }}</p>
+            {% if story.pdf_file %}
+                <iframe src="{{ story.pdf_file }}" width="100%" height="600px"></iframe>
+            {% elif story.text_content %}
+                <div class="text-display">{{ story.text_content|linebreaks }}</div>
+            {% elif story.content %}
+                <div class="text-display">{{ story.content|linebreaks }}</div>
+            {% endif %}
         </div>
     {% else %}
-        <!-- Paywall section -->
         <div class="story-paywall">
             <p>This story is behind a paywall. Pay to unlock full access.</p>
             <form id="payment-form" method="post">
@@ -43,7 +47,6 @@
                     alert(data.error);
                     return;
                 }
-
                 stripe.redirectToCheckout({ sessionId: data.id });
             });
         </script>

@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 app_name = "community"
 urlpatterns = [
@@ -14,4 +16,4 @@ urlpatterns = [
     path("stories/<int:pk>/", views.story_detail, name="story_detail"),
     path("stories/<int:pk>/delete/", views.delete_story, name="delete_story"),
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

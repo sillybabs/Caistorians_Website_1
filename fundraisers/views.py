@@ -103,7 +103,6 @@ def stripe_webhook(request):
             fundraiser.save()
         if payment_amount >= 2:
             yo = UnlockStories.objects.create(user=user, paid = True)
-            print(yo)
     return HttpResponse(status=200)
 
 def success(request):
@@ -127,7 +126,7 @@ def create_story_checkout_session(request, story_id):
             'price_data': {
                 'currency': 'gbp',
                 'product_data': {'name': story.title},
-                'unit_amount': int(amount * 100),
+                'unit_amount': int(amount),
             },
             'quantity': 1,
         }],
