@@ -1,21 +1,20 @@
-# Create your models here.
 from django.db import models
-from django.contrib.auth.models import User
 from django.conf import settings
-class ChatRoom(models.Model):
-    year_group = models.IntegerField(unique=True)
+
+class GroupChatRoom(models.Model):
+    cohort_year = models.IntegerField(unique=True)
 
     def __str__(self):
-        return f"Year {self.year_group}"
+        return f"Cohort {self.cohort_year}"
 
-class MessageeToGroup(models.Model):
-    room = models.ForeignKey(ChatRoom, on_delete=models.CASCADE, related_name='messages')
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    content = models.TextField()
-    timestamp = models.DateTimeField(auto_now_add=True)
+class GroupMessage(models.Model):
+    room = models.ForeignKey(GroupChatRoom, on_delete=models.CASCADE, related_name='messages')
+    sender = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    text = models.TextField()
+    sent_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ['timestamp']
+        ordering = ['sent_at']
 
     def __str__(self):
-        return f"{self.user.username}: {self.content[:30]}"
+        return f"{self.sender.username}: {self.text[:30]}"

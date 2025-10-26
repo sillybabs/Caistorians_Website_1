@@ -3,8 +3,7 @@ from . import views
 
 app_name = "chat"
 
-# urls.py
 urlpatterns = [
-    path('chatchat/<int:year_group>/', views.year_group_chat, name='year_group_chat'),
-    path('chatchat/', views.redirect_chat, name="chat_redirect"),
+    path('redirect/', views.redirect_to_chat, name='chat_redirect'),  # /chat/
+    path('<int:cohort_year>/', views.cohort_chat_view, name='cohort_chat'),  # /chat/2025/
 ]

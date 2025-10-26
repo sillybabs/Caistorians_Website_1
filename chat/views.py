@@ -1,30 +1,40 @@
-
-# Create your views here.
-from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import ChatRoom, MessageeToGroup
+from django.shortcuts import render, redirect
+from .models import GroupChatRoom, GroupMessage
 
 @login_required
-def year_group_chat(request):
-    year_group = request.user.graduation_year
-    if not year_group:
-        return render(request, 'chat/error.html', {
-            'message': 'Your graduation year is not set. Please update your profile.'
-        })
+def redirect_to_chat(request):
+    """Redirect user to their cohort chat"""
+    print("Entered redirect_to_chat")
+    print("User:", request.user.username)
 
-    room, _ = ChatRoom.objects.get_or_create(year_group=year_group)
-    messages = MessageeToGroup.objects.filter(room=room)
+    year = getattr(request.user, 'graduation_year', None)
+    print("Graduation year:", year)
 
-    return render(request, 'chat/year_group_chat.html', {
+    if not year:
+        print("No graduation year — rendering error page.")
+        return render(request, 'chat/error.html', {'message': 'Graduation year not set.'})
+
+    print(f"Redirecting to chat: cohort year {year}")
+    return redirect('chat:cohort_chat', cohort_year=year)
+
+
+@login_required
+def cohort_chat_view(request, cohort_year):
+    """Render chat page for a given cohort"""
+    print("Entered cohort_chat_view")
+    print("Cohort year from URL:", cohort_year)
+    print("User:", request.user.username)
+
+    room, created = GroupChatRoom.objects.get_or_create(cohort_year=cohort_year)
+    print("Room fetched/created:", room)
+    print("Room newly created:", created)
+
+    messages = GroupMessage.objects.filter(room=room)
+    print("Number of messages:", messages.count())
+
+    print("Rendering cohort_chat.html now")
+    return render(request, 'chat/cohort_chat.html', {
         'room': room,
         'messages': messages,
     })
-
-
-from django.shortcuts import redirect
-
-@login_required
-def redirect_chat(request):
-    if request.user.graduation_year:
-        return redirect('chat:year_group_chat', year_group=request.user.graduation_year)
-    return render(request, 'chat/error.html', {'message': 'No graduation year set.'})

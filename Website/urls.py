@@ -30,7 +30,7 @@ urlpatterns = [
     path('news/', include('news.urls', namespace='news')),  # News app
     path('notifications/', include('notifications.urls', namespace='notifications')),  # Notifications app
     path('fundraisers/', include(('fundraisers.urls'), namespace='fundraisers')),
-    path('chat', include("chat.urls", namespace='chat')),
+    path('chat/', include('chat.urls', namespace='chat')),
 ]
 
 if settings.DEBUG:
