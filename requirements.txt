@@ -2,3 +2,5 @@ django
 pillow
 stripe
 python-dotenv
+channels
+channels-redis
