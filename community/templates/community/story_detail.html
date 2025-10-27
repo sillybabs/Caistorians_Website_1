@@ -10,7 +10,7 @@
     {% if has_paid or user == story.author or user.is_staff_account or user.is_admin_account or user.is_admin or user.is_staff %}
         <div class="story-content">
             {% if story.pdf_file %}
-                <iframe src="{{ story.pdf_file }}" width="100%" height="600px"></iframe>
+                <iframe src="{{ story.pdf_file.url }}" width="100%" height="600px"></iframe>
             {% elif story.text_content %}
                 <div class="text-display">{{ story.text_content|linebreaks }}</div>
             {% elif story.content %}
