@@ -169,5 +169,4 @@ EMAIL_HOST_USER = 'caistoriansassociation@gmail.com'
 EMAIL_HOST_PASSWORD = 'pdhr yikh ahej ytja'  # Gmail app password, not normal password
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-X_FRAME_OPTIONS = 'SAMEORIGIN'
 #remember to use 2FA and app passwords when properly launching
